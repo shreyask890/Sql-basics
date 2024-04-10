@@ -33,17 +33,54 @@ WHERE prod_name LIKE '% inch teddy bear';
 # any one of which must match a character in the specified position 
 SELECT cust_contact
 FROM Customers
-WHERE cust_contact like '[JM]%'
-ORDER BY cust_contact;
-
-
-SELECT cust_contact
-FROM Customers
 WHERE cust_contact LIKE '[JM]%' ORDER BY cust_contact;
 
 
-Select * from Customers;
+/* his wildcard can be negated by prefixing the characters with ^ (the caret character).
+For example, the following matches any contact name that does not begin with the letter J or the letter M */
+SELECT cust_contact
+FROM Customers
+WHERE cust_contact LIKE '[^JM]%' ORDER BY cust_contact;
 
+
+# Same result can be accomplished usin the not operator
+SELECT cust_contact
+FROM Customers
+WHERE NOT cust_contact Like '[JM]%' 
+ORDER BY cust_contact;
+
+
+/* Write a SQL statement to retrieve the product name (prod_name) and description (prod_desc) from the Products table, 
+returning only products where the word toy is in the description.*/
+
+SELECT prod_name, prod_desc 
+from Products 
+where prod_desc LIKE '%toy%';
+
+
+/* Now let’s flip things around. Write a SQL statement to retrieve the product name (prod_name) and description (prod_desc) from the Products table, 
+returning only products where the word toy doesn’t appear in the description. And this time, sort the results by product name.*/
+
+SELECT prod_name,prod_desc 
+from Products  
+where not prod_desc like "%toy%"
+order by prod_name;
+
+
+/*Write a SQL statement to retrieve the product name (prod_name) and description (prod_desc) from the Products table, returning only products where both 
+ the words toy and carrots appear in the description. There are a couple of ways to do this, but for this challenge use AND and two LIKE comparisons.*/
+
+SELECT prod_name, prod_desc
+from Products 
+where prod_desc like "%toy%" and prod_desc like "%carrots%";
+
+
+/*Write a SQL statement to retrieve the product name (prod_name) and description (prod_desc) from the Products table, returning only products where both 
+the words toy and carrots appear in the description in that order (the word toy before the word carrots).*/
+
+SELECT prod_name, prod_desc 
+from Products 
+where prod_desc LIKE '%toy%carrots%';
 
 
 
